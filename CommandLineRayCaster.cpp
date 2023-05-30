@@ -1,32 +1,39 @@
 /*
     ASCII ray caster using console screen buffer provided by the Windows library.
-
-    Free software originall by Javidx9 
-
+    Uses ray casting/tracing to simulate old school 2D FPS.
+    
+    Header
+    -------
+    Free software originally by Javidx9. Edited by Sigmacron(kky1997) 
     Slightly modified to run on std:c++17, which will now give an byte ambiguous error if declaring "using namespace std;" before include <Windows.h>
-
     If running on previous version (up to std:c++14), can declare namespace std; before including windows header.
-
     Also changed the map layout so that there is no possiblity that the player can move beyond the map and into an eternal void.
 
-    NOTE: console size should be 120 * 40 (to match screen width and height)
+    Important
+    ---------
+    console size should be 120 * 40 to match screen width and height set by this program.
+    If using std:c++17 ensure that the std namespace declartion is after the windows header, otherwise (std:c++14 and below) it doesn't matter.
+    I used MSYS2 g++ compiler to compile.
+
+    Controls are done through GetAsyncKeyState(): A = Turn left, D = Turn Right, W = Forward, S = Backwards
     
     
-    Quick overview: 
+    Quick overview
+    ---------------
         This raycasting program uses a "map" wstring, which defines the layout of the map. By determining the players position in the map, we use raycasting
         to sample the viewport of the player within the map and render walls, floor, and ceiling accordingly onto the "screen" array which is what is written
         to the console screen buffer.
     
-    Definition of Raycasting:
-
+    Definition of Raycasting
+    ------------------------
         Raycasting refers to the technique used to simulate a 3D environment by casting rays from the player's position and determining the 
         distance to walls in the virtual world.
         The program uses raycasting to create a simple 3D rendering of a maze-like environment. It calculates the distance from the player's position 
         to each wall in the scene by incrementally casting rays and checking for intersections with wall blocks. The program then uses this distance information 
         to shade the walls and create a 3D effect.
-
-        Here's how raycasting works in the program:
-
+        
+    How It Works
+    -------------
         During each iteartion of the for-loop a single ray is cast for a column of the pixels on the screen, the for-loop iterats from left to right,
         ensuring that each column has a single ray cast to it.
 
@@ -64,9 +71,6 @@
             The distance from the player and the dot product (how coincident) between the rendering ray (from player) and the corner rays are calculated.
 
             by comparing these values, the closest corners to the player are determed and if their dot product is within a certain threshold, the bBoundary flag is set.
-
-
-    
 */
 #include <iostream>
 #include <cmath> //for trigonometry functions
@@ -265,7 +269,7 @@ int main()
 						// of the tile, to the player. The more coincident this ray
 						// is to the rendering ray, the closer we are to a tile 
 						// boundary, which we'll shade to add detail to the walls
-                        
+
                         //use vector p to store distance from player to each corner and calculated dot product
 						vector<pair<float, float>> p;
 
