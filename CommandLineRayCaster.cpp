@@ -116,6 +116,7 @@ int main()
     //L prefix indices string literals are wide character strings
     //we use '#' and '.' which are part of the ASCII character set
     //which can actually just be stored in a std::string, but we use wstring and treat them as unicode
+	//this is a 16x16 map, hence we defined nMapWidth and nMapHeight to 16.
 	wstring map;
 	map += L"################";
 	map += L"#..............#";
@@ -167,6 +168,9 @@ int main()
             // this is in respect to fPlayerA's current rotation (so where they are facing)
 			fPlayerX += sinf(fPlayerA) * fSpeed * fElapsedTime;;
 			fPlayerY += cosf(fPlayerA) * fSpeed * fElapsedTime;;
+
+			//collision handling by checking players current position in map array is hitting a wall
+			//if they are, we just decrement the same amount as we added to their position, meaning they stay still
 			if (map.c_str()[(int)fPlayerX * nMapWidth + (int)fPlayerY] == '#')
 			{
 				fPlayerX -= sinf(fPlayerA) * fSpeed * fElapsedTime;;
@@ -182,6 +186,9 @@ int main()
             // this is in respect to fPlayerA's current rotation (so where they are facing)
 			fPlayerX -= sinf(fPlayerA) * fSpeed * fElapsedTime;;
 			fPlayerY -= cosf(fPlayerA) * fSpeed * fElapsedTime;;
+
+			//collision handling by checking players current position in map array is hitting a wall
+			//if they are, we just increment the same amount as we decremented from their position, meaning they stay still
 			if (map.c_str()[(int)fPlayerX * nMapWidth + (int)fPlayerY] == '#')
 			{
 				fPlayerX += sinf(fPlayerA) * fSpeed * fElapsedTime;;
