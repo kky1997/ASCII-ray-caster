@@ -4,7 +4,7 @@
     
     Header
     -------
-    Free software originally by Javidx9. Edited by Sigmacron(kky1997) 
+    Based on free software provided by Javidx9. Edited by Sigmacron(kky1997) 
     Slightly modified to run on std:c++17, which will now give an byte ambiguous error if declaring "using namespace std;" before include <Windows.h>
     If running on previous version (up to std:c++14), can declare namespace std; before including windows header.
     Also changed the map layout so that there is no possiblity that the player can move beyond the map and into an eternal void.
